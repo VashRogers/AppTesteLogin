@@ -12,7 +12,6 @@ export default {
                 body: JSON.stringify({ email, password })
             })
             const response = await request.json()
-            console.log(response)
             return response;
             }
         catch(e){

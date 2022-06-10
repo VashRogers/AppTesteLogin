@@ -10,21 +10,33 @@ const Sessao = (function () {
             await SecureStore.setItemAsync('user', JSON.stringify(this.user))
         },
         async saveToken(){
-            await SecureStore.setItemAsync('token', this.token)
+            await SecureStore.setItemAsync('token', JSON.stringify(this.token))
         },
-        login(token){
+        async login(token, user){
             this.token = token;
+            this.user = user
+            this.logado = true;
+            
+            this.saveUser()
+            this.saveToken()
+            console.log('-----SecureStore tem algo?----')
+            console.log(await SecureStore.getItemAsync('user'))
+            console.log(await SecureStore.getItemAsync('token'))
         },
+        
         async logoff(){
             this.logado = false;
             this.user = null;
             this.token = '';
 
             this.clearStore();
+            console.log('-----SecureStore ta mesmo vazia?----')
+            console.log(await SecureStore.getItemAsync('user'))
+            console.log(await SecureStore.getItemAsync('token'))
         },
         async clearStore() {
             SecureStore.deleteItemAsync('user');
-            SecureStore.deleteItemAsync('token')
+            SecureStore.deleteItemAsync('token');
         },
     };
 }) ();

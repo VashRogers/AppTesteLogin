@@ -8,8 +8,8 @@ import { Entypo } from '@expo/vector-icons';
 
 
 const TelaDeLogin = (props) => {
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('')
+    const [ email, setEmail ] = useState('elidabruno@gmail.com');
+    const [ password, setPassword ] = useState('102030')
     const [ carregando, setCarregando ] = useState(false)
 
     const entrar = async() => {
@@ -33,8 +33,10 @@ const TelaDeLogin = (props) => {
         if(resposta.errorMsg){
             Alert.alert('Ocorreu um erro no Login!', 'Senha ou usuário podem estar incorretos')
         } else{
-            Sessao.login(resposta.token);
-            console.log(Sessao.token)
+            // console.log(resposta.token, resposta)
+            Sessao.login(resposta.token, resposta);
+            // console.log(Sessao.token)
+            // console.log(Sessao.logado)
 
             props.navigation.reset({
                 index:0,
